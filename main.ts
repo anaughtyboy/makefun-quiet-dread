@@ -50,6 +50,9 @@ function main(): void {
   // with no trailing newline added.
   const written = readFileSync(outPath);
   const expected = Buffer.from(COMMENT, "utf8");
+  if (written.length !== expected.length) {
+    fail(`entry.txt is ${written.length} bytes, expected ${expected.length}`);
+  }
   if (!written.equals(expected)) {
     fail("entry.txt bytes do not match the comment exactly");
   }
